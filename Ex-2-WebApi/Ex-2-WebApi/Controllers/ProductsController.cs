@@ -43,7 +43,7 @@ namespace Ex_2_WebApi.Controllers
             return products;
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public Product Get(int id)
         {
             var product = products.Find(product => product.Id == id);
