@@ -42,5 +42,35 @@ namespace WebApi_Ex_2.Controllers
         {
             return products;
         }
+
+        [HttpGet("{id}")]
+        public Product Get(int id)
+        {
+            var product = products.Find(p => p.Id == id);
+            return product;
+        }
+
+        [HttpGet("{id}")]
+        public void Post([FromBody] Product product)
+        {
+            products.Add(product);
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            var product = products.Where(p => p.Id == id);
+            products = products.Except(product).ToList();
+        }
+
+        [HttpPut("{id}")]
+        public void Put (int id, [FromBody] Product product)
+        {
+            var existingProduct = products.Where(p => p.Id == id);
+            products = products.Except(existingProduct).ToList();
+
+            products.Add(product);
+        }
+
     }
 }
